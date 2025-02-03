@@ -17,3 +17,5 @@ RUN chmod +x /entrypoint.sh
 RUN sed -i '/imk/s/.*/#&/g' /etc/rsyslog.conf
 # Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
+
+LABEL org.opencontainers.image.source https://github.com/sagipael/docker-mailrelay
