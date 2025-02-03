@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  mailrelay:
+    image: ghcr.io/sagipael/docker-mailrelay:latest 
+    container_name: mailrelay
+    restart: unless-stopped
+    ports:
+      - "25:25"
+    environment:
+      SMTP_SERVER: "smtp.gmail.com"
+      SMTP_PORT: "587"
+      SMTP_TLS: "yes"
+      SMTP_USER: "some-username@gmail.com"
+      SMTP_PASSWORD: "smtp-app-password"
+      ALLOWED_NETWORKS: "10.0.1.0/24"
+      
