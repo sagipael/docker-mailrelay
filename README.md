@@ -1,6 +1,7 @@
 # Docker Mail relay
 Mail Relay server to allow send mails from internal network without authentication. 
 
+Hint: for Gmail as smtp server - [follow the instructions](https://support.google.com/mail/answer/185833?hl=en)
 ## Parameters
 
 | Parameter | Function |
