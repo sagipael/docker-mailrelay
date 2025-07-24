@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     ports:
       - "25:25"
+      - "587:587"
     environment:
       SMTP_SERVER: "smtp.gmail.com"
       SMTP_PORT: "587"
