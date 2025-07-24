@@ -18,7 +18,7 @@ postconf -e "mydestination ="
 postconf -e "relayhost = [$SMTP_SERVER]:$SMTP_PORT"
 postconf -e "mynetworks = $ALLOWED_NETWORKS 127.0.0.0/8"
 postconf -e "smtp_sasl_auth_enable = yes"
-postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd"
+postconf -e "smtp_sasl_password_maps = static:$SMTP_USER:$SMTP_PASSWORD"
 postconf -e "smtp_sasl_security_options = noanonymous"
 postconf -e "smtp_sasl_tls_security_options = noanonymous"
 postconf -e "maillog_file = /dev/stdout"
@@ -31,14 +31,8 @@ else
     postconf -e "smtp_use_tls = no"
 fi
 
-# Create authentication file
-echo "[$SMTP_SERVER]:$SMTP_PORT $SMTP_USER:$SMTP_PASSWORD" > /etc/postfix/sasl_passwd
-postmap /etc/postfix/sasl_passwd
-chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
-
 # start syslog
 rsyslogd
 
 # Start Postfix
-/usr/lib/postfix/configure-instance.sh -
-/usr/sbin/postfix -c /etc/postfix start-fg
+/usr/sbin/postfix start-fg
